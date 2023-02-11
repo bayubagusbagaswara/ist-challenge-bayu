@@ -8,12 +8,16 @@ import lombok.NoArgsConstructor;
 
 @Data
 @JsonPropertyOrder({
+        "code",
         "success",
         "message"
 })
 @NoArgsConstructor
 @AllArgsConstructor
 public class MessageResponse {
+
+    @JsonProperty("code")
+    private Integer code;
 
     @JsonProperty("success")
     private Boolean success;
