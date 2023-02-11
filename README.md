@@ -17,7 +17,7 @@
 
 # Format Response
 
-1. Registrasi Login sukses, berikan response Http Status Code 201, pesan Sukses registrasi
+1. Registrasi sukses, berikan response Http Status Code 201, pesan Sukses registrasi
 2. Registrasi Gagal, username sudah ada di database berikan response Http Status Code 409 dengan pesan Username sudah terpakai 
 3. Sukses Login, berikan response Http Status Code 200, dengan pesan Sukses Login 
 4. Gagal Login, username dan atau password kosong berikan response Http Status Code 400, dengan pesan "Username dan atau Password kosong"
