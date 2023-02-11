@@ -1,8 +1,6 @@
 package com.ist.challenge.bayu.service;
 
-import com.ist.challenge.bayu.dto.CreateUserRequest;
-import com.ist.challenge.bayu.dto.CreateUserResponse;
-import com.ist.challenge.bayu.dto.UserResponse;
+import com.ist.challenge.bayu.dto.*;
 
 import java.util.List;
 
@@ -18,6 +16,7 @@ public interface UserService {
     List<UserResponse> getAllUsers();
 
     // get all user by pagination and sorting
+    ListUserResponse listAllUsers(ListUserRequest listUserRequest);
 
     // update user
 
