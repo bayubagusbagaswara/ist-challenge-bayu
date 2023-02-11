@@ -19,7 +19,7 @@ import org.springframework.http.HttpStatus;
 })
 @AllArgsConstructor
 @NoArgsConstructor
-public class WebResponse<T> {
+public class ApiResponse<T> {
 
     @JsonProperty("code")
     private Integer code;
