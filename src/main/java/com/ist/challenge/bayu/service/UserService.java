@@ -12,6 +12,10 @@ public interface UserService {
 
     List<UserResponse> getAllUsers();
 
+    UserResponse getUserByUsername(String username);
+
+    List<UserResponse> getUsersByUsernameContains(String username);
+
     ListUserResponse listAllUsers(ListUserRequest listUserRequest);
 
     UpdateUserResponse updateUser(Long id, UpdateUserRequest updateUserRequest);
