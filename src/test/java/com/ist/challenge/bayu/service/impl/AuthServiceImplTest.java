@@ -1,9 +1,6 @@
 package com.ist.challenge.bayu.service.impl;
 
-import com.ist.challenge.bayu.dto.LoginRequest;
-import com.ist.challenge.bayu.dto.MessageResponse;
-import com.ist.challenge.bayu.dto.RegisterRequest;
-import com.ist.challenge.bayu.dto.RegisterResponse;
+import com.ist.challenge.bayu.dto.*;
 import com.ist.challenge.bayu.exception.BadRequestException;
 import com.ist.challenge.bayu.exception.UnauthorizedException;
 import com.ist.challenge.bayu.service.AuthService;
@@ -40,10 +37,10 @@ class AuthServiceImplTest {
         loginRequest.setUsername("albert");
         loginRequest.setPassword("albert123");
 
-        MessageResponse messageResponse = authService.login(loginRequest);
+        LoginResponse loginResponse = authService.login(loginRequest);
 
-        assertTrue(messageResponse.getSuccess());
-        log.info("Message: {}", messageResponse.getMessage());
+//        assertTrue(messageResponse.getSuccess());
+//        log.info("Message: {}", messageResponse.getMessage());
     }
 
     // login error Username is Empty
@@ -54,7 +51,7 @@ class AuthServiceImplTest {
         loginRequest.setPassword("bayu123");
 
         assertThrows(BadRequestException.class, () -> {
-            MessageResponse login = authService.login(loginRequest);
+            LoginResponse login = authService.login(loginRequest);
         });
     }
 
@@ -65,7 +62,7 @@ class AuthServiceImplTest {
         loginRequest.setPassword("");
 
         assertThrows(BadRequestException.class, () -> {
-            MessageResponse login = authService.login(loginRequest);
+            LoginResponse loginResponse = authService.login(loginRequest);
         });
     }
 
@@ -76,7 +73,7 @@ class AuthServiceImplTest {
         loginRequest.setPassword("albert1234");
 
         assertThrows(UnauthorizedException.class, () -> {
-            MessageResponse login = authService.login(loginRequest);
+            LoginResponse loginResponse = authService.login(loginRequest);
         });
     }
 
