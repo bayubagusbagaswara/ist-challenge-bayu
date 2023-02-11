@@ -4,6 +4,8 @@ import com.ist.challenge.bayu.dto.CreateUserRequest;
 import com.ist.challenge.bayu.dto.CreateUserResponse;
 import com.ist.challenge.bayu.dto.UserResponse;
 
+import java.util.List;
+
 public interface UserService {
 
     // create new user
@@ -13,6 +15,7 @@ public interface UserService {
     UserResponse getUserById(Long id);
 
     // get all user
+    List<UserResponse> getAllUsers();
 
     // get all user by pagination and sorting
 
