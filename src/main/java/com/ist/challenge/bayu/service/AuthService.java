@@ -1,7 +1,6 @@
 package com.ist.challenge.bayu.service;
 
-import com.ist.challenge.bayu.dto.RegisterRequest;
-import com.ist.challenge.bayu.dto.RegisterResponse;
+import com.ist.challenge.bayu.dto.*;
 
 public interface AuthService {
 
@@ -9,4 +8,5 @@ public interface AuthService {
     RegisterResponse register(RegisterRequest registerRequest);
 
     // login
+    MessageResponse login(LoginRequest loginRequest);
 }
