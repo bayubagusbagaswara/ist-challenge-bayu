@@ -19,6 +19,7 @@ public interface UserService {
     ListUserResponse listAllUsers(ListUserRequest listUserRequest);
 
     // update user
+    UpdateUserResponse updateUser(Long id, UpdateUserRequest updateUserRequest);
 
     // delete user
 }
