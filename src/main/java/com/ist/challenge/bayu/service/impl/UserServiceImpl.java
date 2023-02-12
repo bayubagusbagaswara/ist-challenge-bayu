@@ -11,7 +11,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -52,7 +51,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserResponse getUserByUsername(String username) {
         User user = userRepository.findByUsername(username)
-                .orElseThrow(() -> new ResourceNotFoundException(new MessageResponse(HttpStatus.NOT_FOUND.value(), Boolean.FALSE, "User not found with username : " + username)));
+                .orElseThrow(() -> new ResourceNotFoundException( "User not found with username : " + username));
         return mapToUserResponse(user);
     }
 
@@ -102,12 +101,17 @@ public class UserServiceImpl implements UserService {
 
         // check password baru tidak boleh sama dengan password lama
         if (user.getPassword().equalsIgnoreCase(updateUserRequest.getPassword())) {
-            throw new BadRequestException(new MessageResponse(HttpStatus.BAD_REQUEST.value(), Boolean.FALSE, "Password tidak boleh sama dengan password sebelumnya"));
+            throw new BadRequestException("Password tidak boleh sama dengan password sebelumnya");
         }
 
         // update User
-        user.setUsername(updateUserRequest.getUsername());
-        user.setPassword(updateUserRequest.getPassword());
+        if (updateUserRequest.getUsername() != null) {
+            user.setUsername(updateUserRequest.getUsername());
+        }
+
+        if (updateUserRequest.getPassword() != null) {
+            user.setPassword(updateUserRequest.getPassword());
+        }
 
         userRepository.save(user);
 
@@ -126,12 +130,12 @@ public class UserServiceImpl implements UserService {
 
     public User findById(Long id) {
         return userRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException(new MessageResponse(HttpStatus.NOT_FOUND.value(), Boolean.FALSE, "User not found with id : " + id)));
+                .orElseThrow(() -> new ResourceNotFoundException("User not found with id : " + id));
     }
 
     public void checkUsernameIsExists(String username) {
         if (userRepository.existsByUsername(username)) {
-            throw new ConflictException(new MessageResponse(HttpStatus.CONFLICT.value(), Boolean.FALSE, "Username sudah terpakai"));
+            throw new ConflictException("Username sudah terpakai");
         }
     }
 
