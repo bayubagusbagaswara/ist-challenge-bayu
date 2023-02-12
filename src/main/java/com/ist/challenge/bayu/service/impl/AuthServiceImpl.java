@@ -48,21 +48,19 @@ public class AuthServiceImpl implements AuthService {
 
     public void checkUsernameOrPasswordIsEmpty(LoginRequest loginRequest) {
         if (loginRequest.getUsername().equalsIgnoreCase("")
-                || loginRequest.getUsername().isEmpty()) {
-            throw new BadRequestException(new MessageResponse(HttpStatus.BAD_REQUEST.value(), Boolean.FALSE, "Username is empty"));
+                || loginRequest.getUsername().isEmpty()
+                || loginRequest.getPassword().equalsIgnoreCase("")
+                || loginRequest.getPassword().isEmpty()) {
+            throw new BadRequestException(new MessageResponse(HttpStatus.BAD_REQUEST.value(), Boolean.FALSE, "Username atau Password tidak boleh kosong"));
         }
 
-        if (loginRequest.getPassword().equalsIgnoreCase("")
-                || loginRequest.getPassword().isEmpty()) {
-            throw new BadRequestException(new MessageResponse(HttpStatus.BAD_REQUEST.value(), Boolean.FALSE, "Password is empty"));
-        }
     }
 
     public void checkUsernameAndPasswordIsMatching(LoginRequest loginRequest) {
         UserResponse user = userService.getUserByUsername(loginRequest.getUsername());
 
         if (!user.getPassword().equalsIgnoreCase(loginRequest.getPassword())) {
-            throw new UnauthorizedException(new MessageResponse(HttpStatus.UNAUTHORIZED.value(), Boolean.FALSE, "Password does not match"));
+            throw new UnauthorizedException(new MessageResponse(HttpStatus.UNAUTHORIZED.value(), Boolean.FALSE, "Password tidak cocok dengan username : " + loginRequest.getUsername()));
         }
     }
 
