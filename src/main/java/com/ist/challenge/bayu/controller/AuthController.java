@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
@@ -20,7 +22,7 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<MessageResponse> register(@RequestBody RegisterRequest registerRequest) {
+    public ResponseEntity<MessageResponse> register(@Valid @RequestBody RegisterRequest registerRequest) {
         RegisterResponse register = authService.register(registerRequest);
         MessageResponse messageResponse = MessageResponse.builder()
                 .code(201)
@@ -32,7 +34,7 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<MessageResponse> login(@RequestBody LoginRequest loginRequest) {
+    public ResponseEntity<MessageResponse> login(@Valid @RequestBody LoginRequest loginRequest) {
         LoginResponse login = authService.login(loginRequest);
         MessageResponse messageResponse = MessageResponse.builder()
                 .code(200)
