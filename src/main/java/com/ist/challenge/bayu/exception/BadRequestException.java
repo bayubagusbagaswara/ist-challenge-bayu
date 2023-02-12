@@ -1,24 +1,24 @@
 package com.ist.challenge.bayu.exception;
 
-import com.ist.challenge.bayu.dto.MessageResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ResponseStatus(value = HttpStatus.BAD_REQUEST)
 public class BadRequestException extends RuntimeException {
 
-    private final MessageResponse messageResponse;
-
-    public BadRequestException(MessageResponse messageResponse) {
-        this.messageResponse = messageResponse;
+    public BadRequestException() {
+        super();
     }
 
-    public BadRequestException(String message, MessageResponse messageResponse) {
+    public BadRequestException(String message) {
         super(message);
-        this.messageResponse = messageResponse;
     }
 
-    public MessageResponse getMessageResponse() {
-        return messageResponse;
+    public BadRequestException(String message, Throwable cause) {
+        super(message, cause);
+    }
+
+    public BadRequestException(Throwable cause) {
+        super(cause);
     }
 }
