@@ -5,7 +5,6 @@ import com.ist.challenge.bayu.exception.BadRequestException;
 import com.ist.challenge.bayu.exception.UnauthorizedException;
 import com.ist.challenge.bayu.service.AuthService;
 import com.ist.challenge.bayu.service.UserService;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -51,7 +50,7 @@ public class AuthServiceImpl implements AuthService {
                 || loginRequest.getUsername().isEmpty()
                 || loginRequest.getPassword().equalsIgnoreCase("")
                 || loginRequest.getPassword().isEmpty()) {
-            throw new BadRequestException(new MessageResponse(HttpStatus.BAD_REQUEST.value(), Boolean.FALSE, "Username atau Password tidak boleh kosong"));
+            throw new BadRequestException("Username atau Password tidak boleh kosong");
         }
 
     }
@@ -60,7 +59,7 @@ public class AuthServiceImpl implements AuthService {
         UserResponse user = userService.getUserByUsername(loginRequest.getUsername());
 
         if (!user.getPassword().equalsIgnoreCase(loginRequest.getPassword())) {
-            throw new UnauthorizedException(new MessageResponse(HttpStatus.UNAUTHORIZED.value(), Boolean.FALSE, "Password tidak cocok dengan username : " + loginRequest.getUsername()));
+            throw new UnauthorizedException("Password tidak cocok dengan username : " + loginRequest.getUsername());
         }
     }
 
