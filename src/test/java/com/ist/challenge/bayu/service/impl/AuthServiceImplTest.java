@@ -2,6 +2,7 @@ package com.ist.challenge.bayu.service.impl;
 
 import com.ist.challenge.bayu.dto.*;
 import com.ist.challenge.bayu.exception.BadRequestException;
+import com.ist.challenge.bayu.exception.ConflictException;
 import com.ist.challenge.bayu.exception.UnauthorizedException;
 import com.ist.challenge.bayu.service.AuthService;
 import org.junit.jupiter.api.Test;
@@ -32,6 +33,17 @@ class AuthServiceImplTest {
     }
 
     @Test
+    void registerFailedUsernameIsExists() {
+        RegisterRequest registerRequest = new RegisterRequest();
+        registerRequest.setUsername("albert");
+        registerRequest.setPassword("albert123");
+
+        assertThrows(ConflictException.class, () -> {
+            RegisterResponse register = authService.register(registerRequest);
+        });
+    }
+
+    @Test
     void loginSuccess() {
         LoginRequest loginRequest = new LoginRequest();
         loginRequest.setUsername("albert");
@@ -39,11 +51,9 @@ class AuthServiceImplTest {
 
         LoginResponse loginResponse = authService.login(loginRequest);
 
-//        assertTrue(messageResponse.getSuccess());
-//        log.info("Message: {}", messageResponse.getMessage());
+        assertNotNull(loginResponse);
     }
 
-    // login error Username is Empty
     @Test
     void loginErrorUsernameIsEmpty() {
         LoginRequest loginRequest = new LoginRequest();
