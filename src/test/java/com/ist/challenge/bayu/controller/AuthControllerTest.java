@@ -2,10 +2,7 @@ package com.ist.challenge.bayu.controller;
 
 import com.ist.challenge.bayu.dto.*;
 import com.ist.challenge.bayu.service.AuthService;
-import org.junit.jupiter.api.MethodOrderer;
-import org.junit.jupiter.api.Order;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestMethodOrder;
+import org.junit.jupiter.api.*;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.slf4j.Logger;
