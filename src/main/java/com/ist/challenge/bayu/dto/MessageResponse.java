@@ -2,7 +2,6 @@ package com.ist.challenge.bayu.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,7 +14,6 @@ import lombok.NoArgsConstructor;
         "message"
 })
 @NoArgsConstructor
-@AllArgsConstructor
 public class MessageResponse {
 
     @JsonProperty("code")
@@ -27,4 +25,9 @@ public class MessageResponse {
     @JsonProperty("message")
     private String message;
 
+    public MessageResponse(Integer code, Boolean success, String message) {
+        this.code = code;
+        this.success = success;
+        this.message = message;
+    }
 }
