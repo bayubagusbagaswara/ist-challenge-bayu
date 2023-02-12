@@ -2,7 +2,7 @@ package com.ist.challenge.bayu.service.impl;
 
 import com.ist.challenge.bayu.dto.*;
 import com.ist.challenge.bayu.exception.BadRequestException;
-import com.ist.challenge.bayu.exception.ConflictException;
+import com.ist.challenge.bayu.exception.UsernameAlreadyExistsException;
 import com.ist.challenge.bayu.exception.ResourceNotFoundException;
 import com.ist.challenge.bayu.service.UserService;
 import org.junit.jupiter.api.MethodOrderer;
@@ -74,7 +74,7 @@ class UserServiceImplTest {
         createUserRequest.setUsername("bayu");
         createUserRequest.setPassword("bbb123");
 
-        assertThrows(ConflictException.class, () -> {
+        assertThrows(UsernameAlreadyExistsException.class, () -> {
             CreateUserResponse user = userService.createUser(createUserRequest);
         });
     }
@@ -178,7 +178,7 @@ class UserServiceImplTest {
         updateUserRequest.setUsername("bagus"); // username lama bayu
         updateUserRequest.setPassword("viento12");
 
-        assertThrows(ConflictException.class, () -> {
+        assertThrows(UsernameAlreadyExistsException.class, () -> {
             UpdateUserResponse user = userService.updateUser(id, updateUserRequest);
         });
     }

@@ -3,7 +3,7 @@ package com.ist.challenge.bayu.controller;
 import com.ist.challenge.bayu.dto.ApiResponse;
 import com.ist.challenge.bayu.dto.MessageResponse;
 import com.ist.challenge.bayu.exception.BadRequestException;
-import com.ist.challenge.bayu.exception.ConflictException;
+import com.ist.challenge.bayu.exception.UsernameAlreadyExistsException;
 import com.ist.challenge.bayu.exception.ResourceNotFoundException;
 import com.ist.challenge.bayu.exception.UnauthorizedException;
 import org.springframework.http.HttpStatus;
@@ -65,9 +65,9 @@ public class ErrorController {
         return new ResponseEntity<>(messageResponse, HttpStatus.NOT_FOUND);
     }
 
-    @ExceptionHandler(value = ConflictException.class)
+    @ExceptionHandler(value = UsernameAlreadyExistsException.class)
     @ResponseStatus(code = HttpStatus.CONFLICT)
-    public ResponseEntity<MessageResponse> conflictException(ConflictException exception) {
+    public ResponseEntity<MessageResponse> conflictException(UsernameAlreadyExistsException exception) {
         MessageResponse messageResponse = MessageResponse.builder()
                 .code(HttpStatus.CONFLICT.value())
                 .success(Boolean.FALSE)

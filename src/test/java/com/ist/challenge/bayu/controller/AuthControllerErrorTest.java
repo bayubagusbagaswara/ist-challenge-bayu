@@ -2,7 +2,7 @@ package com.ist.challenge.bayu.controller;
 
 import com.ist.challenge.bayu.dto.*;
 import com.ist.challenge.bayu.exception.BadRequestException;
-import com.ist.challenge.bayu.exception.ConflictException;
+import com.ist.challenge.bayu.exception.UsernameAlreadyExistsException;
 import com.ist.challenge.bayu.exception.UnauthorizedException;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
@@ -27,7 +27,7 @@ class AuthControllerErrorTest {
         registerRequest.setUsername("bagus");
         registerRequest.setPassword("bagus1234567");
 
-        assertThrows(ConflictException.class, () -> {
+        assertThrows(UsernameAlreadyExistsException.class, () -> {
             ResponseEntity<MessageResponse> register = authController.register(registerRequest);
         });
     }

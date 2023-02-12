@@ -2,7 +2,7 @@ package com.ist.challenge.bayu.service.impl;
 
 import com.ist.challenge.bayu.dto.*;
 import com.ist.challenge.bayu.exception.BadRequestException;
-import com.ist.challenge.bayu.exception.ConflictException;
+import com.ist.challenge.bayu.exception.UsernameAlreadyExistsException;
 import com.ist.challenge.bayu.exception.UnauthorizedException;
 import com.ist.challenge.bayu.service.AuthService;
 import org.junit.jupiter.api.MethodOrderer;
@@ -44,7 +44,7 @@ class AuthServiceImplTest {
         registerRequest.setUsername("ronaldo");
         registerRequest.setPassword("ronaldo12345");
 
-        assertThrows(ConflictException.class, () -> {
+        assertThrows(UsernameAlreadyExistsException.class, () -> {
             RegisterResponse register = authService.register(registerRequest);
         });
     }

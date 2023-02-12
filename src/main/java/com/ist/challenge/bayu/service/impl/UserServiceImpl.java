@@ -2,7 +2,7 @@ package com.ist.challenge.bayu.service.impl;
 
 import com.ist.challenge.bayu.dto.*;
 import com.ist.challenge.bayu.exception.BadRequestException;
-import com.ist.challenge.bayu.exception.ConflictException;
+import com.ist.challenge.bayu.exception.UsernameAlreadyExistsException;
 import com.ist.challenge.bayu.exception.ResourceNotFoundException;
 import com.ist.challenge.bayu.model.User;
 import com.ist.challenge.bayu.repository.UserRepository;
@@ -135,7 +135,7 @@ public class UserServiceImpl implements UserService {
 
     public void checkUsernameIsExists(String username) {
         if (userRepository.existsByUsername(username)) {
-            throw new ConflictException("Username sudah terpakai");
+            throw new UsernameAlreadyExistsException("Username sudah terpakai");
         }
     }
 

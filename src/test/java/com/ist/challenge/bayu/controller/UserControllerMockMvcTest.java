@@ -3,7 +3,7 @@ package com.ist.challenge.bayu.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ist.challenge.bayu.dto.*;
 import com.ist.challenge.bayu.exception.BadRequestException;
-import com.ist.challenge.bayu.exception.ConflictException;
+import com.ist.challenge.bayu.exception.UsernameAlreadyExistsException;
 import com.ist.challenge.bayu.service.UserService;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.*;
@@ -23,7 +23,6 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -108,7 +107,7 @@ class UserControllerMockMvcTest {
                 .andDo(print());
 
         when(userService.createUser(createUserRequest1))
-                .thenThrow(ConflictException.class);
+                .thenThrow(UsernameAlreadyExistsException.class);
 
         mockMvc.perform(MockMvcRequestBuilders
                         .post("/api/users/save")
@@ -294,7 +293,7 @@ class UserControllerMockMvcTest {
 
         // lakukan update tetapi gagal
         when(userService.updateUser(userId, updateUserRequest))
-                .thenThrow(ConflictException.class);
+                .thenThrow(UsernameAlreadyExistsException.class);
 
         mockMvc.perform(MockMvcRequestBuilders
                         .put("/api/users/{id}", userId)
