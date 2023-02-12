@@ -28,7 +28,7 @@ public class UserController {
                 .message("Register berhasil dengan username : " + user.getUsername())
                 .build();
 
-        return new ResponseEntity<>(messageResponse, HttpStatus.OK);
+        return new ResponseEntity<>(messageResponse, HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")
@@ -80,7 +80,6 @@ public class UserController {
         return new ResponseEntity<>(apiResponse, HttpStatus.OK);
     }
 
-    // get all user with parameter page and sort
     @GetMapping("/page")
     public ResponseEntity<ApiResponse<ListUserResponse>> getAllUsersPage(
             @RequestParam(name = "pageNo", defaultValue = AppConstants.DEFAULT_PAGE_NUMBER, required = false) int pageNo,
@@ -105,7 +104,6 @@ public class UserController {
         return new ResponseEntity<>(apiResponse, HttpStatus.OK);
     }
 
-    // update user
     @PutMapping("/{id}")
     public ResponseEntity<ApiResponse<UpdateUserResponse>> updateUser(@PathVariable(name = "id") Long id,
                                                                       @RequestBody UpdateUserRequest updateUserRequest) {
@@ -120,7 +118,6 @@ public class UserController {
         return new ResponseEntity<>(apiResponse, HttpStatus.CREATED);
     }
 
-    // delete user
     @DeleteMapping("/{id}")
     public ResponseEntity<MessageResponse> deleteUser(@PathVariable(name = "id") Long id) {
         userService.deleteUserById(id);
